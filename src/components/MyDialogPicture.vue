@@ -4,8 +4,6 @@
   </div>
 </template>
 
-<script lang="ts">
-  export default {
-    name:'my-dialog-picture'
-  }
+<script lang="ts" setup>
+
 </script>

@@ -1,12 +1,25 @@
-const headerMenu = [
+export type linkButton = {
+  header: string;
+  link?: string;
+  linkParam?: { category: string };
+  key?: number | string;
+  subtree?: subtree;
+  icon?: string;
+  isDisable?: boolean;
+};
+export type subtree = Array<linkButton>;
+
+const headerMenu: subtree = [
   {
     header: "Main Page",
     link: "HomePage",
     icon: "mdi-home",
+    key: "one",
   },
   {
     header: "Galleries",
     icon: "mdi-file-image-outline",
+    key: "two",
     subtree: [
       { header: "New", link: "GalleriesPage", linkParam: { category: "new" } },
       {
@@ -24,17 +37,16 @@ const headerMenu = [
   {
     header: "Useful Links",
     icon: "mdi-link",
+    key: "three",
     subtree: [
-      { header: "Relax", link: "https://arkadia.xyz", linkParam: {} },
+      { header: "Relax", link: "https://arkadia.xyz" },
       {
         header: "Github",
         link: "https://github.com/Ivan-Sotnikov",
-        linkParam: {},
       },
       {
         header: "Page 404",
         link: "PNF",
-        linkParam: {},
       },
     ],
   },
@@ -42,6 +54,7 @@ const headerMenu = [
     header: "About",
     icon: "mdi-information-variant",
     link: "About",
+    key: "four",
   },
 ];
 export default headerMenu;
