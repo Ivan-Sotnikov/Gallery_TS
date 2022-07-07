@@ -28,7 +28,7 @@ const headerMenu: subtree = [
         linkParam: { category: "popular" },
       },
       {
-        header: "Hight resolution",
+        header: "High resolution",
         link: "GalleriesPage",
         linkParam: { category: "hiRes" },
       },
