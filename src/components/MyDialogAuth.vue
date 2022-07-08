@@ -69,7 +69,7 @@
           <v-alert
             type="error"
             closable
-            :model="isAlertVisible"
+            v-model="isAlertVisible"
             class="mb-5"
           >
             Oops, something goes wrong! <br />Try again later.</v-alert
@@ -115,15 +115,15 @@
 
 <script lang="ts" setup>
 import { ref, type Ref } from "vue";
-let showPassword = ref<boolean>(false);
-let userNewName = ref<string>("");
-let userNewEmail = ref<string>("");
-let userNewPassword = ref<string>("");
-let userExistingEmail = ref<string>("");
-let userExistingPassword = ref<string>("");
-let isValid = ref<boolean>(true);
-let isNewUser: Ref<boolean> = ref(true);
-let isAlertVisible: Ref<boolean> = ref(false);
+const showPassword = ref<boolean>(false);
+const userNewName = ref<string>("");
+const userNewEmail = ref<string>("");
+const userNewPassword = ref<string>("");
+const userExistingEmail = ref<string>("");
+const userExistingPassword = ref<string>("");
+const isValid = ref<boolean>(true);
+const isNewUser: Ref<boolean> = ref(true);
+const isAlertVisible: Ref<boolean> = ref(false);
 //здесь присутствует 2 вида задания типа ref с целью проверки работоспособности каждого из способов
 function userRegister(): void {
   console.log(

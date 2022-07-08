@@ -12,7 +12,7 @@
   </v-alert>
   <v-container>
     <v-row>
-      <template v-for="item in props.galleyImages">
+      <template v-for="item in props.images" :id="item.id">
         <v-col cols="12" md="3">
           <v-hover v-slot="{ isHovering, props }">
             <v-card v-bind="props">
@@ -34,15 +34,7 @@
                       class="mb-4"
                       icon="mdi-magnify"
                       variant="outlined"
-                      @click="
-                        $router.push({
-                          name: 'PicturesPage',
-                          params: {
-                            category: `${$route.params.category}`,
-                            id: `${item.id}`,
-                          },
-                        })
-                      "
+                      @click="showDialog(item.url,item.title)"
                     ></v-btn>
                     <div
                       class="text-center h-25 px-3 bg-grey-darken-3 w-100 text-uppercase"
@@ -52,24 +44,44 @@
                   </div>
                 </transition>
               </v-img>
+             
             </v-card>
           </v-hover>
-          <v-card-text class="text-right">
-            {{ Math.round(Math.random() * 1000) }}
-            <v-icon @click="like">mdi-heart-outline</v-icon></v-card-text
-          >
+           <v-card-text class="text-right">
+                <span> {{Math.round(Math.random() * 1000) }}</span>
+                <v-icon @click="like">mdi-heart-outline</v-icon></v-card-text
+              >
         </v-col>
       </template>
     </v-row>
   </v-container>
+  <v-dialog v-model="dialogPicture.dialog">
+    <my-picture-dialog v-bind="dialogPicture"></my-picture-dialog>
+  </v-dialog>
 </template>
 
 <script setup lang="ts">
-import { functionTypeAnnotation } from "@babel/types";
-import { ref, watch } from "vue";
+import { reactive, ref } from "vue";
+import MyPictureDialog from "@/components/MyPictureDialog.vue";
 
-const props = defineProps(["galleyImages"]);
+const props = defineProps(["images"]);
 const alert = ref(false);
+
+const dialogPicture=reactive({
+  dialog:false,
+  url:'',
+  title:'',
+  comments:[]
+})
+
+async function showDialog(url:string,title:string) {
+   await fetch(
+    `https://jsonplaceholder.typicode.com/comments?_limit=${Math.round(Math.random()*5)}`
+  ).then(r=>r.json()).then(json=>dialogPicture.comments=json);
+  dialogPicture.dialog=true;
+  dialogPicture.url=url;
+  dialogPicture.title=title
+}
 
 function like() {
   alert.value = true;

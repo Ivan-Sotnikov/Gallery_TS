@@ -8,7 +8,6 @@
         variant="text"
         @click="
           dialog = true;
-          dialogType = 'auth';
         "
         >mdi-account</v-icon
       >
@@ -16,8 +15,7 @@
   </v-app-bar>
   <my-header-navigation v-model="drawer" />
   <v-dialog v-model="dialog">
-    <my-dialog-auth v-if="dialogType == 'auth'" />
-    <my-dialog-picture v-else-if="dialogType == 'picture'" />
+    <my-dialog-auth />
   </v-dialog>
 </template>
 
@@ -25,9 +23,7 @@
 import { ref, type Ref } from "vue";
 import MyHeaderNavigation from "@/components/MyHeaderNavigation.vue";
 import MyDialogAuth from "@/components/MyDialogAuth.vue";
-import MyDialogPicture from "@/components/MyDialogPicture.vue";
 
-let drawer: Ref<boolean> = ref(false);
-let dialog: Ref<boolean> = ref(false);
-let dialogType: Ref<string | undefined> = ref(undefined);
+const drawer: Ref<boolean> = ref(false);
+const dialog: Ref<boolean> = ref(false);
 </script>
