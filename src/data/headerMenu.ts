@@ -1,15 +1,6 @@
-export type linkButton = {
-  header: string;
-  link?: string;
-  linkParam?: { category: string };
-  key?: number | string;
-  subtree?: subtree;
-  icon?: string;
-  isDisable?: boolean;
-};
-export type subtree = Array<linkButton>;
+import type { HeaderSubmenu } from "@/models/types";
 
-const headerMenu: subtree = [
+const headerMenu: HeaderSubmenu = [
   {
     header: "Main Page",
     link: "HomePage",

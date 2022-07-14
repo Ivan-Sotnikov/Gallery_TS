@@ -8,8 +8,7 @@
     prominent
     v-model="alert"
     toggle
-  >
-  </v-alert>
+  />
   <v-container>
     <v-row>
       <template v-for="item in props.images" :id="item.id">
@@ -19,8 +18,9 @@
               <v-card-title
                 :class="{ 'text-info': isHovering }"
                 class="text-center text-uppercase"
-                >{{ item.title.split(" ", 1).join(" ") }}</v-card-title
               >
+                {{ item.title.split(" ", 1).join(" ") }}
+              </v-card-title>
               <v-img
                 :src="item.thumbnailUrl"
                 :class="{ imageHover: !isHovering }"
@@ -34,8 +34,8 @@
                       class="mb-4"
                       icon="mdi-magnify"
                       variant="outlined"
-                      @click="showDialog(item.url,item.title)"
-                    ></v-btn>
+                      @click="showDialog(item.url, item.title)"
+                    />
                     <div
                       class="text-center h-25 px-3 bg-grey-darken-3 w-100 text-uppercase"
                     >
@@ -44,47 +44,53 @@
                   </div>
                 </transition>
               </v-img>
-             
             </v-card>
           </v-hover>
-           <v-card-text class="text-right">
-                <span> {{Math.round(Math.random() * 1000) }}</span>
-                <v-icon @click="like">mdi-heart-outline</v-icon></v-card-text
-              >
+          <v-card-text class="text-right">
+            <span> {{ Math.round(Math.random() * 1000) }}</span>
+            <v-icon @click="alert = true">mdi-heart-outline</v-icon>
+          </v-card-text>
         </v-col>
       </template>
     </v-row>
   </v-container>
-  <v-dialog v-model="dialogPicture.dialog">
-    <my-picture-dialog v-bind="dialogPicture"></my-picture-dialog>
+  <v-dialog v-model="dialogPicture.isDialogVisible">
+    <my-picture-dialog v-bind="dialogPicture" />
   </v-dialog>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from "vue";
+import type { ImageDialog, ImageFetch } from "@/models/types";
 import MyPictureDialog from "@/components/MyPictureDialog.vue";
 
-const props = defineProps(["images"]);
-const alert = ref(false);
+const props = defineProps({
+  images: {
+    type: Array<ImageFetch>,
+    default: () => {
+      return [];
+    },
+    required: true,
+  },
+});
 
-const dialogPicture=reactive({
-  dialog:false,
-  url:'',
-  title:'',
-  comments:[]
-})
+const alert = ref<boolean>(false);
+const dialogPicture = reactive<ImageDialog>({
+  isDialogVisible: false,
+  url: undefined,
+});
 
-async function showDialog(url:string,title:string) {
-   await fetch(
-    `https://jsonplaceholder.typicode.com/comments?_limit=${Math.round(Math.random()*5)}`
-  ).then(r=>r.json()).then(json=>dialogPicture.comments=json);
-  dialogPicture.dialog=true;
-  dialogPicture.url=url;
-  dialogPicture.title=title
-}
-
-function like() {
-  alert.value = true;
+async function showDialog(url: string, title: string): Promise<void> {
+  await fetch(
+    `https://jsonplaceholder.typicode.com/comments?_limit=${Math.round(
+      Math.random() * 5
+    )}`
+  )
+    .then((r) => r.json())
+    .then((json) => (dialogPicture.comments = json));
+  dialogPicture.isDialogVisible = true;
+  dialogPicture.url = url;
+  dialogPicture.title = title;
 }
 </script>
 <style scoped>

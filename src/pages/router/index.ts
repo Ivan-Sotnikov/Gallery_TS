@@ -1,33 +1,28 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import GalleriesPage from "@/pages/MyGalleries.vue";
-import HomePage from "@/pages/MyHomePage.vue";
-import PicturesPage from "@/pages/MyPictures.vue";
-import About from "@/pages/MyAbout.vue";
-
 const routes = [
   {
     path: "/",
     name: "HomePage",
-    component: HomePage,
+    component:()=> import("@/pages/MyHomePage.vue"),
     meta: { titleRus: "Главная страница" },
   },
   {
     path: "/galleries/:category/gallery/:id",
     name: "PicturesPage",
-    component: PicturesPage,
+    component:()=> import("@/pages/MyPictures.vue"),
     meta: { titleRus: "Галерея" },
   },
   {
     path: "/galleries/:category",
     name: "GalleriesPage",
-    component: GalleriesPage,
+    component:()=> import("@/pages/MyGalleries.vue"),
     meta: { titleRus: "Галереи" },
   },
   {
     path: "/about",
     name: "About",
-    component: About,
+    component:()=> import("@/pages/MyAbout.vue"),
     meta: { titleRus: "О нас" },
   },
 ];
@@ -38,3 +33,4 @@ const router = createRouter({
 });
 
 export default router;
+//lazy load!!!!

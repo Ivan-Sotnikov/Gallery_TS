@@ -23,7 +23,7 @@ __metadata:
     eslint-plugin-vue: ^9.0.0
     jsdom: ^20.0.0
     npm-run-all: ^4.1.5
-    pinia: ^2.0.14
+    pinia: ^2.0.16
     prettier: ^2.5.1
     roboto-fontface: "*"
     typescript: ~4.7.4
@@ -3036,9 +3036,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pinia@npm:^2.0.14":
-  version: 2.0.14
-  resolution: "pinia@npm:2.0.14"
+"pinia@npm:^2.0.16":
+  version: 2.0.16
+  resolution: "pinia@npm:2.0.16"
   dependencies:
     "@vue/devtools-api": ^6.1.4
     vue-demi: "*"
@@ -3051,7 +3051,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: d07ed55b53e92da0971c3fcc0a1bd520b26cd50d266f46c8bab24fed87788461782a2c75088cf97c79810e7a4ceb28381f5d77daf280883ad3340c41962d0934
+  checksum: 226aaf57a8809848ec7f679999578308ad70b8939de6163af3ff62e91c2606a274fd8ab626af8071654d76316ff260fe3fc42a9725218bdbcd4b46b1a26e90d5
   languageName: node
   linkType: hard
 

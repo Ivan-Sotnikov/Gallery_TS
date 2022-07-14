@@ -10,7 +10,7 @@
     toggle
   >
   </v-alert>
-  <v-container>
+  <v-container class="w-100">
     <v-row>
       <template v-for="item in props.galleyImages">
         <v-col cols="12" md="3">
@@ -19,8 +19,9 @@
               <v-card-title
                 :class="{ 'text-info': isHovering }"
                 class="text-center text-uppercase"
-                >{{ item.title.split(" ", 1).join(" ") }}</v-card-title
               >
+                {{ item.title.split(" ", 1).join(" ") }}
+              </v-card-title>
               <v-img
                 :src="item.thumbnailUrl"
                 :class="{ imageHover: !isHovering }"
@@ -43,7 +44,7 @@
                           },
                         })
                       "
-                    ></v-btn>
+                    />
                     <div
                       class="text-center h-25 px-3 bg-grey-darken-3 w-100 text-uppercase"
                     >
@@ -56,8 +57,8 @@
           </v-hover>
           <v-card-text class="text-right">
             {{ Math.round(Math.random() * 1000) }}
-            <v-icon @click="like">mdi-heart-outline</v-icon></v-card-text
-          >
+            <v-icon @click="alert = true" icon="mdi-heart-outline" />
+          </v-card-text>
         </v-col>
       </template>
     </v-row>
@@ -65,15 +66,20 @@
 </template>
 
 <script setup lang="ts">
-import { functionTypeAnnotation } from "@babel/types";
-import { ref, watch } from "vue";
+import { ref } from "vue";
+import type { ImageFetch } from "@/models/types";
 
-const props = defineProps(["galleyImages"]);
-const alert = ref(false);
+const props = defineProps({
+  galleyImages: {
+    type: Array<ImageFetch>,
+    default: () => {
+      return [];
+    },
+    required: true,
+  },
+});
 
-function like() {
-  alert.value = true;
-}
+const alert = ref<boolean>(false);
 </script>
 <style scoped>
 .imageHover {

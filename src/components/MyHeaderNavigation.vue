@@ -10,8 +10,7 @@
           :disabled="item.isDisable"
           @click="redirect(item)"
           width="100%"
-        >
-        </v-list-item>
+        />
         <v-list-group v-else color="blue" :id="i">
           <template v-slot:activator="{ props }">
             <v-list-item
@@ -20,8 +19,7 @@
               :value="item.header"
               :prepend-icon="item.icon"
               :disabled="item.isDisable"
-            >
-            </v-list-item>
+            />
           </template>
           <v-list-item
             v-for="(subItem, a) in item.subtree"
@@ -31,8 +29,7 @@
             @click="redirect(subItem)"
             width="100%"
             variant="tonal"
-          >
-          </v-list-item>
+          />
         </v-list-group>
       </template>
     </v-list>
@@ -42,11 +39,12 @@
 <script lang="ts" setup>
 import headerMenu from "@/data/headerMenu";
 import { useRouter } from "vue-router";
-import type { linkButton } from "@/data/headerMenu";
+import type { HeaderNavButton } from "@/models/types";
 
 const router = useRouter();
-const items: Array<linkButton> = headerMenu;
-const redirect = (item: linkButton) => {
+
+const items: Array<HeaderNavButton> = headerMenu;
+const redirect = (item: HeaderNavButton): void => {
   if (item.link?.indexOf("http") == 0) {
     window.location.href = item.link || "";
     return;
